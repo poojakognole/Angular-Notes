@@ -1,0 +1,102 @@
+**Angular**:
+Angular is javascript framework which allows you create reactive single page applications.
+Introduced by Google in 2012
+
+**What is Single Page Application?**
+A single-page application (SPA) is a website design approach where each new page's content is served not from loading new HTML pages but generated dynamically through JavaScript's ability to manipulate the DOM elements on the existing page itself.
+Pros:
+- SPA is fast
+- There is no need to write code to render pages on the server. It is much easier to get started because you can usually kick off development from a file file://URI, without using any server at all.
+
+**Installation Procedure**
+1. Install Node.js
+2. npm install -g @angular/cli
+
+Create new project:
+ng new <app-name>
+
+Run the application:
+ng serve - -open : opens with browser
+
+**How the angular app gets loaded and started: **
+the concept is that this file is not the file served by the server. The server served an index.html file. Remember that Angular is a framework which allows us to create “Single Page Applications”, and it (index.html) is the single page which was provided by the server.
+
+index.html
+`<html lang="en">`
+`<head>`
+`<meta charset="utf-8">  `
+`<title>StartApp</title>  `
+`<base href="/">  `
+`<meta name="viewport" content="width=device-width, initial-scale=1">  `
+`<link rel="icon" type="image/x-icon" href="favicon.ico"> ` 
+`</head>  `
+`<body>  `
+  ` <app-root>Loading.....</app-root>  `
+`</body>  `
+`</html> `
+
+So, here, we come to know that it is a component which is provided by the CLI. We can say that, whenever we create a project from CLI, by default, one component is created, i.e., “app component”.
+ 
+Now, look into “app.component.ts” file. It is a TypeScript file. We will discuss the component and how we can create a custom component in my next blog. Here, the main thing is the “selector” property.
+
+app.component.ts 
+import { Component } from '@angular/core';  
+  
+@Component({  
+  selector: 'app-root',  
+  templateUrl: './app.component.html',  
+  styleUrls: ['./app.component.css']  
+})  
+  
+export class AppComponent {  
+  title = 'app';  
+}  
+Selector property contains exactly the same string as we have in our index.html file. This information is needed by the Angular to place this part into an index.html file with the template of the component.
+ 
+The template of the component is “./app.component.html”, so, Angular includes this part into the body of the index.html file.
+ 
+Now, we are able to understand how an “app-root” is included in our index.html file. But here, the main question is “How did Angular trigger or how did it kick off ?”
+ Let us understand this concept. We need to inspect our Angular application and we may find a couple of script files, which are injected by the CLI at runtime (dynamically). That's why we are unable to see these files in our “index.html”.
+ for example - vendor.bundle.js,  inline.bundle.js
+ 
+ Whenever ng-serve builds our application, it creates “bundles” and automatically adds these to our index.html file at runtime. So, from these bundles, the first code has to be executed from “main.ts” file, i.e., “main.ts” file is the main file from where the execution of an Angular application will start.
+ 
+** main.ts**
+ import { enableProdMode } from '@angular/core';  
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';  
+  
+import { AppModule } from './app/app.module';  
+import { environment } from './environments/environment';  
+  
+if (environment.production) {  
+  enableProdMode();  
+}  
+  
+platformBrowserDynamic().bootstrapModule(AppModule)  
+  .catch(err => console.log(err));  
+  
+  In this file, this “bootstrap” method is important which bootstraps (start) our Angular application.
+ 
+This refers to AppModule, which looks into the app folders. If we look into “app.module” file, here, we can see a bootstrap array which is basically a list of all the components which should be known to the compiler at the point of time it analyzes our index.html file.
+
+
+import { BrowserModule } from '@angular/platform-browser';  
+import { NgModule } from '@angular/core';  
+  
+import { AppComponent } from './app.component';  
+  
+@NgModule({  
+  declarations: [  
+    AppComponent  
+  ],  
+  imports: [  
+    BrowserModule  
+  ],  
+  providers: [],  
+  bootstrap: [AppComponent]  
+})  
+export class AppModule { } 
+
+**In Short :**
+[![](https://www.c-sharpcorner.com/article/how-an-angular-5-application-get-started-or-loaded/Images/image009.png)](https://www.c-sharpcorner.com/article/how-an-angular-5-application-get-started-or-loaded/Images/image009.png)  
+ 
