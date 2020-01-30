@@ -1,6 +1,6 @@
 **Angular**:
 Angular is javascript framework which allows you create reactive single page applications and to build client side applicatiion.
-Introduced by Google in 2012
+Introduced by Google
 
 **What is Single Page Application?**
 A single-page application (SPA) is a website design approach where each new page's content is served not from loading new HTML pages but generated dynamically through JavaScript's ability to manipulate the DOM elements on the existing page itself.
