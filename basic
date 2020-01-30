@@ -100,3 +100,16 @@ export class AppModule { }
 **In Short :**
 [![](https://www.c-sharpcorner.com/article/how-an-angular-5-application-get-started-or-loaded/Images/image009.png)](https://www.c-sharpcorner.com/article/how-an-angular-5-application-get-started-or-loaded/Images/image009.png)  
  
+ Basic Building Blocks of Angular:
+1.Modules:
+a.  Basically by default one root module will be available i.e. AppModule
+b. Each Module is made up of components and services
+c. one application can contains many modules
+
+2.Components:
+a. Components controls portion of view in browser.
+b. Component contains html template for view in browser and class for controlling logic of particular view
+
+3 Services:
+Basically class which contains business logic of application
+
